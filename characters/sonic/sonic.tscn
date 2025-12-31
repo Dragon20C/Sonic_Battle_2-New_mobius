@@ -880,7 +880,7 @@ _data = {
 
 [node name="sonic" type="CharacterBody3D" groups=["Player", "main_sonic"]]
 script = ExtResource("1_jxrfq")
-upper_window_duration = 0.1
+upper_window_duration = 0.05
 heavy_window_duration = 0.1
 damage = 5
 

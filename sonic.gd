@@ -156,7 +156,8 @@ func _physics_process(delta: float) -> void:
 	regenerate_ichikoro(delta)
 	move_and_slide()
 	_handle_hit_properties()
-	#print(current_state)
+	if running_start == true:
+		print(running_start)
 
 func regenerate_ichikoro(delta: float) -> void:
 	if not is_attacking and not is_healing and current_state not in [State.ATTACK_1, State.ATTACK_2, State.ATTACK_3, State.HEAVY_ATTACK, State.AIR_ATTACK]:
@@ -279,6 +280,8 @@ func handle_special_inputs(input_dir: Vector2) -> void:
 # ===== STATE HANDLERS =====
 func handle_idle_state(delta: float, input_dir: Vector2, direction: Vector3) -> void:
 	apply_friction()
+	if Input.is_action_just_pressed("dash_p1"):
+		running_start = true
 	if input_dir != Vector2.ZERO:
 		if last_input_direction.x != 0 and input_dir.x != 0 and sign(last_input_direction.x) != sign(input_dir.x):
 			change_state(State.TURNING_AROUND)
@@ -426,6 +429,8 @@ func handle_heal_end_state(delta: float, input_dir: Vector2) -> void:
 
 # JITTER FIX: Pivot states handle the flip exactly halfway through the timer to match the frame change
 func handle_turning_around_state(delta: float, input_dir: Vector2) -> void:
+	if Input.is_action_just_pressed("dash_p1"):
+		running_start = true
 	velocity.x = move_toward(velocity.x, 0, friction * turn_friction_multiplier)
 	velocity.z = move_toward(velocity.z, 0, friction * turn_friction_multiplier)
 	turning_timer -= delta
@@ -447,6 +452,8 @@ func handle_turning_around_state(delta: float, input_dir: Vector2) -> void:
 		else: change_state(State.IDLE)
 
 func handle_turning_around_while_running_state(delta: float, input_dir: Vector2) -> void:
+	if Input.is_action_just_pressed("dash_p1"):
+		running_start = true
 	velocity.x = move_toward(velocity.x, 0, friction * turn_friction_multiplier)
 	velocity.z = move_toward(velocity.z, 0, friction * turn_friction_multiplier)
 	turning_while_running_timer -= delta
@@ -503,15 +510,17 @@ func _apply_dashing (direction: Vector3) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, direction.x * max_speed, (acceleration / 1.5))
 			velocity.z = move_toward(velocity.z, direction.z * (max_speed - 0.75), (acceleration / 1.75))
-	else:apply_friction()
+	else:
+		apply_friction()
+		change_state(State.IDLE)
 	if Input.is_action_just_released("dash_p1"):
 		change_state(State.IDLE)
 
 func apply_air_control(direction: Vector3) -> void:
 	if direction:
 		var air_accel = acceleration * air_control_factor
-		velocity.x = move_toward(velocity.x, direction.x * max_speed, air_accel)
-		velocity.z = move_toward(velocity.z, direction.z * max_speed, air_accel)
+		velocity.x = move_toward(velocity.x, direction.x * (max_speed - 1.5), air_accel)
+		velocity.z = move_toward(velocity.z, direction.z * (max_speed- 2), air_accel)
 
 # ===== ACTION FUNCTIONS =====
 func jump() -> void:
