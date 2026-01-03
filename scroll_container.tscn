@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c3xm57ac25n6r"]
+[gd_scene load_steps=55 format=3 uid="uid://c3xm57ac25n6r"]
 
 [ext_resource type="Script" uid="uid://bvuyyema11nvg" path="res://userinterfacecodes/mainmenubg/scroll_container.gd" id="1_3l2vg"]
 [ext_resource type="Script" uid="uid://b1sqqpu2d40am" path="res://main_menu.gd" id="1_ia6wt"]
@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://rrdxrf84i5l7" path="res://userinterfacecodes/transitions/transition.gd" id="20_6t1pv"]
 [ext_resource type="Script" uid="uid://byhl2qt1eucv" path="res://userinterfacecodes/mainmenubg/battle_record.gd" id="21_v51eu"]
 [ext_resource type="Script" uid="uid://cobyeef2yeu65" path="res://userinterfacecodes/mainmenubg/options.gd" id="23_b8o6h"]
+[ext_resource type="Texture2D" uid="uid://cfefvjijpke8t" path="res://userinterface/mainmenubg/arrow_left.png" id="28_vrttm"]
+[ext_resource type="Texture2D" uid="uid://ynvhvp8v6yf1" path="res://userinterface/mainmenubg/arrow_right.png" id="29_5fnyu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wso73"]
 shader = ExtResource("2_p11k0")
@@ -272,6 +274,120 @@ _data = {
 &"fade_in_training": SubResource("Animation_v51eu")
 }
 
+[sub_resource type="Animation" id="Animation_12c6n"]
+resource_name = "hit_arrow_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arrow left:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(2.5, 2.5), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arrow left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(191, 283), Vector2(144, 283.00003), Vector2(191, 283)]
+}
+
+[sub_resource type="Animation" id="Animation_vrttm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arrow left:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arrow left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(191, 283)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("arrow right:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("arrow right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(722, 283)]
+}
+
+[sub_resource type="Animation" id="Animation_5fnyu"]
+resource_name = "hit_arrow_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arrow right:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(2.5, 2.5), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arrow right:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(722, 283), Vector2(763.00006, 285.00003), Vector2(722, 283)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r678k"]
+_data = {
+&"RESET": SubResource("Animation_vrttm"),
+&"hit_arrow_left": SubResource("Animation_12c6n"),
+&"hit_arrow_right": SubResource("Animation_5fnyu")
+}
+
 [node name="main_menu" type="CanvasLayer"]
 script = ExtResource("1_ia6wt")
 
@@ -441,11 +557,27 @@ libraries = {
 &"": SubResource("AnimationLibrary_vek5b")
 }
 
+[node name="arrow left" type="Sprite2D" parent="."]
+position = Vector2(191, 283)
+scale = Vector2(2, 2)
+texture = ExtResource("28_vrttm")
+
+[node name="arrow right" type="Sprite2D" parent="."]
+position = Vector2(722, 283)
+scale = Vector2(2, 2)
+texture = ExtResource("29_5fnyu")
+
+[node name="arrow_handler" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r678k")
+}
+speed_scale = 2.0
+
 [connection signal="property_list_changed" from="." to="." method="_on_story_mode_pressed"]
 [connection signal="focus_entered" from="ScrollContainer/HBoxContainer/Story Mode" to="ScrollContainer/HBoxContainer/Story Mode" method="_on_focus_entered"]
 [connection signal="focus_exited" from="ScrollContainer/HBoxContainer/Story Mode" to="ScrollContainer/HBoxContainer/Story Mode" method="_on_focus_exited"]
-[connection signal="pressed" from="ScrollContainer/HBoxContainer/Story Mode" to="." method="_on_story_mode_pressed"]
 [connection signal="pressed" from="ScrollContainer/HBoxContainer/Story Mode" to="." method="_on_training_pressed"]
+[connection signal="pressed" from="ScrollContainer/HBoxContainer/Story Mode" to="." method="_on_story_mode_pressed"]
 [connection signal="focus_entered" from="ScrollContainer/HBoxContainer/Battle Mode" to="ScrollContainer/HBoxContainer/Battle Mode" method="_on_focus_entered"]
 [connection signal="focus_exited" from="ScrollContainer/HBoxContainer/Battle Mode" to="ScrollContainer/HBoxContainer/Battle Mode" method="_on_focus_exited"]
 [connection signal="pressed" from="ScrollContainer/HBoxContainer/Battle Mode" to="." method="_on_battle_mode_pressed"]

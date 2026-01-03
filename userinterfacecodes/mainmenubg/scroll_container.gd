@@ -15,10 +15,12 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_right"):
 		# Move right and loop around
 		current_index = (current_index + 1) % list_container.get_child_count()
+		$"../arrow_handler".play("hit_arrow_right")
 		scroll_to_current()
 	elif event.is_action_pressed("ui_left"):
 		# Move left and loop around
 		current_index = (current_index - 1 + list_container.get_child_count()) % list_container.get_child_count()
+		$"../arrow_handler".play("hit_arrow_left")
 		scroll_to_current()
 	if event.is_action_pressed("ui_accept"):
 		var focused := get_viewport().gui_get_focus_owner() as Button

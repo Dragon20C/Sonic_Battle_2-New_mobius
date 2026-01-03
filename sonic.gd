@@ -31,6 +31,7 @@ enum HeavyPhase {
 @export var air_control_factor: float = 0.33
 var current_direction: String
 var running_start: bool = false
+var apply_dash_friction: bool = false
 
 @export_category("Jump Settings")
 @export var jump_force: float = 4.5
@@ -312,6 +313,8 @@ func handle_falling_state(delta: float, direction: Vector3) -> void:
 	if is_on_floor(): change_state(State.LANDING)
 
 func handle_landing_state(delta: float, input_dir: Vector2) -> void:
+	if Input.is_action_pressed("dash_p1"):
+		running_start = true
 	apply_friction()
 	landing_timer -= delta
 	if landing_timer <= 0:
@@ -498,8 +501,13 @@ func apply_movement(direction: Vector3) -> void:
 	else: apply_friction()
 
 func apply_friction() -> void:
-	velocity.x = move_toward(velocity.x, 0, friction)
-	velocity.z = move_toward(velocity.z, 0, friction)
+	if apply_dash_friction == true:
+		velocity.x = move_toward(velocity.x, 0, friction * 3)
+		velocity.z = move_toward(velocity.z, 0, friction * 3)
+		apply_dash_friction = false
+	else:
+		velocity.x = move_toward(velocity.x, 0, friction)
+		velocity.z = move_toward(velocity.z, 0, friction)
 
 func _apply_dashing (direction: Vector3) -> void:
 	if direction:
@@ -508,13 +516,15 @@ func _apply_dashing (direction: Vector3) -> void:
 			velocity.z =  direction.z * (max_speed + 1.25)
 			running_start = false
 		else:
-			velocity.x = move_toward(velocity.x, direction.x * max_speed, (acceleration / 1.5))
-			velocity.z = move_toward(velocity.z, direction.z * (max_speed - 0.75), (acceleration / 1.75))
+			velocity.x = move_toward(velocity.x, direction.x * max_speed, (acceleration / 2.75))
+			velocity.z = move_toward(velocity.z, direction.z * (max_speed - 0.75), (acceleration / 3.25))
 	else:
 		apply_friction()
-		change_state(State.IDLE)
+		change_state(State.LANDING)
+		apply_dash_friction = true
 	if Input.is_action_just_released("dash_p1"):
-		change_state(State.IDLE)
+		change_state(State.LANDING)
+		apply_dash_friction = true
 
 func apply_air_control(direction: Vector3) -> void:
 	if direction:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://miaofgr2p8m5"
-path="res://.godot/imported/dashing.png-5832de38c0edf08817958d0958da3e55.ctex"
+uid="uid://gn7bljs6l18w"
+path="res://.godot/imported/SB2_Effects.png-307487f467c7a633ccf900f5408f91f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dashing.png"
-dest_files=["res://.godot/imported/dashing.png-5832de38c0edf08817958d0958da3e55.ctex"]
+source_file="res://SB2_Effects.png"
+dest_files=["res://.godot/imported/SB2_Effects.png-307487f467c7a633ccf900f5408f91f4.ctex"]
 
 [params]
 
