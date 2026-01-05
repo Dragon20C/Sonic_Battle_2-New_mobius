@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cxyrqupkbbony"]
+[gd_scene load_steps=31 format=4 uid="uid://cxyrqupkbbony"]
 
 [ext_resource type="Script" uid="uid://blejebh7gihg6" path="res://directional_light_3d.gd" id="1_h0wof"]
 [ext_resource type="Texture2D" uid="uid://csbc0j8o5on6v" path="res://levels/emerald_beach_Emerald_Beach.png" id="2_27ga2"]
@@ -7,7 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dcfsi00miqbhh" path="res://userinterface/transitions/Transition.tscn" id="7_yokb4"]
 [ext_resource type="Script" uid="uid://rrdxrf84i5l7" path="res://userinterfacecodes/transitions/transition.gd" id="8_35c7g"]
 [ext_resource type="PackedScene" uid="uid://c844scnvf5jom" path="res://characters/sonic/sonic.tscn" id="8_n068f"]
+[ext_resource type="Script" uid="uid://jhtnda572v40" path="res://battle_camera.gd" id="9_nb1nt"]
 [ext_resource type="PackedScene" uid="uid://bnuij1366kj5w" path="res://characters/sonic copy/sonic copy sprites/sonic_copy.tscn" id="9_uvldv"]
+[ext_resource type="Texture2D" uid="uid://byvgw5ndbo7je" path="res://sb2nm health bar empty.png" id="10_u834y"]
+[ext_resource type="Texture2D" uid="uid://dwv0yk0hkrvb1" path="res://sb2nm health bar progress.png" id="11_w3v2p"]
+[ext_resource type="Script" uid="uid://djh0ymftn0mru" path="res://characters/sonic/health_bar.gd" id="12_1s3fb"]
+[ext_resource type="Script" uid="uid://c84a0ecj6mg3f" path="res://characters/sonic/ichikoro_gauge.gd" id="13_1pekq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fu4bq"]
 sky_top_color = Color(0.73026067, 0.693336, 0.99026114, 1)
@@ -99,6 +104,132 @@ data = PackedVector3Array(17.940048, 0, -17.940048, 19.933388, 0, -19.933388, 19
 [sub_resource type="BoxShape3D" id="BoxShape3D_yokb4"]
 size = Vector3(1.3452148, 3.0009766, 8.783831)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffcej"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vubs"]
+bg_color = Color(0, 0.96862745, 0, 1)
+
+[sub_resource type="Animation" id="Animation_o7udh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("health bar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("health bar:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("health bar/ichikoro gauge:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lwdla"]
+resource_name = "full_ichikoro"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("health bar:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(6.4980063, 1, 6.49),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.7192913, 1.7192913, 1.7192913, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("health bar/ichikoro gauge:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(9.849156, 12.996047, 9.849145),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(18.892157, 15.898927, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wpnlk"]
+resource_name = "ichikoro_and_low_health"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("health bar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.64554, 0.5835755, 0.5655762, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("health bar/ichikoro gauge:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mr5q0"]
+resource_name = "low_health"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("health bar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.99998957, 0.3110768, 0.29434845, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpnlk"]
+_data = {
+&"RESET": SubResource("Animation_o7udh"),
+&"full_ichikoro": SubResource("Animation_lwdla"),
+&"ichikoro_and_low_health": SubResource("Animation_wpnlk"),
+&"low_health": SubResource("Animation_mr5q0")
+}
+
 [node name="Arena" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -145,9 +276,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060438767, 0.31678134, 1.72
 [node name="sonic copy" parent="." groups=["Player"] instance=ExtResource("9_uvldv")]
 transform = Transform3D(1, 0, 1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, -0.81669617, 0.5464397, 1.4098233)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.12947224, -0.36797848, 0.9207762, 0.05123816, 0.9298343, 0.36439377, -0.99025834, 0, 0.13924228, 3.857544, 1.3627677, 0.11212826)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.18381166, 0.5439453, 3.3158736)
 
@@ -175,3 +303,46 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.1
 [node name="boundry4" type="CollisionShape3D" parent="StaticBody3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43524647, 0.45654297, -1.4901161e-08)
 shape = SubResource("BoxShape3D_yokb4")
+
+[node name="BattleCamera" type="Camera3D" parent="." node_paths=PackedStringArray("character_target")]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 2.775, 4)
+fov = 35.0
+script = ExtResource("9_nb1nt")
+character_target = NodePath("../sonic")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="BattleCamera"]
+layer = 2
+
+[node name="health bar" type="TextureProgressBar" parent="BattleCamera/CanvasLayer" node_paths=PackedStringArray("parent")]
+offset_right = 128.0
+offset_bottom = 27.0
+scale = Vector2(1.5306447, 2.3509898)
+texture_under = ExtResource("10_u834y")
+texture_progress = ExtResource("11_w3v2p")
+texture_progress_offset = Vector2(4, 5)
+script = ExtResource("12_1s3fb")
+parent = NodePath("../../../sonic")
+
+[node name="ichikoro gauge" type="ProgressBar" parent="BattleCamera/CanvasLayer/health bar" node_paths=PackedStringArray("parent")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 9.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ffcej")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3vubs")
+show_percentage = false
+script = ExtResource("13_1pekq")
+parent = NodePath("../../../../sonic")
+
+[node name="Label" type="Label" parent="BattleCamera/CanvasLayer/health bar"]
+layout_mode = 0
+offset_right = 41.0
+offset_bottom = 23.0
+scale = Vector2(0.7986786, 0.49933958)
+text = "sonic"
+
+[node name="filter effects" type="AnimationPlayer" parent="BattleCamera/CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_wpnlk")
+}

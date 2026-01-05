@@ -1,11 +1,10 @@
 extends TextureProgressBar
 
-var parent
+@export var parent : Node3D
 var max_value_amount
 var min_value_amount
 
 func _ready():
-	parent = $"../../.."
 	
 	# Debug parent path
 	print("Health bar parent node: ", parent.name if is_instance_valid(parent) else "Invalid parent")

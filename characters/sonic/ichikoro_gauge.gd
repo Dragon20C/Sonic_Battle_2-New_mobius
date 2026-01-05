@@ -1,11 +1,11 @@
 extends ProgressBar
 
-var parent
+# making  this export means we can find our player e.g sonic!
+@export var parent : Node3D
 var max_value_amount
 var min_value_amount
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	parent = $"../../../.."
 	max_value_amount = parent.Maxichikoro
 	min_value_amount = 0
  # Replace with function body.
