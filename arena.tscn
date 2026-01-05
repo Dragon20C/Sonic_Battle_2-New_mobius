@@ -26,6 +26,7 @@ sky_material = SubResource("ProceduralSkyMaterial_fu4bq")
 background_mode = 1
 background_color = Color(0, 0.13408402, 0.7320286, 1)
 sky = SubResource("Sky_sbb53")
+ambient_light_source = 2
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmrbc"]
@@ -33,12 +34,14 @@ resource_name = "Material.001"
 cull_mode = 2
 albedo_texture = ExtResource("2_27ga2")
 roughness = 0.5
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh2sm"]
 resource_name = "Material"
 cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("3_h0wof")
+texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yokb4"]
 _surfaces = [{
@@ -237,6 +240,7 @@ environment = SubResource("Environment_pbtuc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_bake_mode = 1
 shadow_enabled = true
 script = ExtResource("1_h0wof")
 
@@ -245,6 +249,7 @@ transform = Transform3D(0.21338952, 0, 0, 0, 0.2535397, 0, 0, 0, 0.14933519, 0, 
 
 [node name="emerald_beach" type="MeshInstance3D" parent="emerald_beach"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010503042, -0.04120989, 0.057403997)
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_35c7g")
 skeleton = NodePath("")
 
