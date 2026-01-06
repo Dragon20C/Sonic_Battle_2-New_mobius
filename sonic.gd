@@ -131,6 +131,8 @@ var current_facing_direction: int = 1
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 #endregion
 
+var KO_s: int
+
 # ===== INITIALIZATION =====
 func _ready() -> void:
 	if not $attack_handler.animation_finished.is_connected(_on_attack_handler_animation_finished):
@@ -157,8 +159,9 @@ func _physics_process(delta: float) -> void:
 	regenerate_ichikoro(delta)
 	move_and_slide()
 	_handle_hit_properties()
-	if running_start == true:
-		print(running_start)
+	if Input.is_action_just_pressed("get_KOs (only for testing purposes)"):
+		KO_s = KO_s + 1
+
 
 func regenerate_ichikoro(delta: float) -> void:
 	if not is_attacking and not is_healing and current_state not in [State.ATTACK_1, State.ATTACK_2, State.ATTACK_3, State.HEAVY_ATTACK, State.AIR_ATTACK]:
